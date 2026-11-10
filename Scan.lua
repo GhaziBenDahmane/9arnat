@@ -31,7 +31,8 @@ local function Next()
   if not scanning then return end
   if #queue == 0 then
     scanning = false
-    print("|cff66ccff9arnat:|r scan finished. Use /9ar prices to review.")
+    print("|cff66ccff9arnat:|r scan finished.")
+    if DOV.OnScanUpdate then DOV.OnScanUpdate() end
     return
   end
   if not CanSendAuctionQuery or CanSendAuctionQuery() then
@@ -51,6 +52,7 @@ ev:SetScript("OnEvent", function(_, event)
   elseif event == "AUCTION_HOUSE_CLOSED" then ahOpen = false; scanning = false
   elseif event == "AUCTION_ITEM_LIST_UPDATE" then
     local _, best = Record()
+    if DOV.OnScanUpdate then DOV.OnScanUpdate() end
     if scanning and current then
       if best and not best[current] then
         -- nothing found for this component: remember that it isn't listed
@@ -61,6 +63,8 @@ ev:SetScript("OnEvent", function(_, event)
   end
 end)
 
+function DOV.IsScanning() return scanning end
+function DOV.CanScan() return ahOpen and hasLegacyAH end
 function DOV.StartScan()
   if not hasLegacyAH then
     print("|cff66ccff9arnat:|r this client has no classic AH query API. Scan with Auctionator instead (its prices are used automatically).")

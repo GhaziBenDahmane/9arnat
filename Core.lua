@@ -70,7 +70,7 @@ function DOV.Evaluate(link)
   return {
     de = ev, vendor = sellPrice or 0, missing = missing, stale = stale,
     extrapolated = extrapolated, parts = parts, ilvl = ilvl,
-    better = (ev > (sellPrice or 0)) and "DE" or "VENDOR",
+    better = (ev - (sellPrice or 0) > (Arnat9DB.minGain or 0) * 10000 and ev > (sellPrice or 0)) and "DE" or "VENDOR",
     gain = ev - (sellPrice or 0),
   }
 end
