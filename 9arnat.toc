@@ -1,0 +1,13 @@
+## Interface: 16001, 11508, 11507
+## Title: 9arnat
+## Notes: Shows on item tooltips and in a bag report whether to disenchant or vendor, using auction house prices.
+## Author: ghazi
+## Version: 1.0
+## OptionalDeps: Auctionator
+## SavedVariables: Arnat9DB
+
+DisenchantData.lua
+Prices.lua
+Core.lua
+Scan.lua
+UI.lua
